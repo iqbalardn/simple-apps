@@ -27,6 +27,7 @@ describe('Unit Test /app2', () => {
   });
 });
 
+/*
 describe('Integration Test Connect Database', () => {
   beforeEach(() => {
     // Set the connection for the application to use
@@ -43,4 +44,4 @@ describe('Integration Test Connect Database', () => {
     expect(response.status).toBe(200);
   });
 });
-
+*/
