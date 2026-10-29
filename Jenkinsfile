@@ -3,14 +3,14 @@ pipeline {
     agent { label 'devops1-iqbal' }
 
     stages {
-        stage('Pull SCM') {
+        stage('Pull SCM to Server') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/iqbalardn/simple-apps.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Image Docker') {
             steps {
                 sh '''
                     cd apps
@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('Testing') {
+        stage('Testing Image with Jest') {
             steps {
                 sh '''
                     cd apps
@@ -28,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Code Review') {
+        stage('Code Review with SonarQube') {
             steps {
                 withCredentials([
                     string(
@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Docker Compose to Server') {
             steps {
                 sh '''
                     docker compose up --build -d
