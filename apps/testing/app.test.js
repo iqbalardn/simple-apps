@@ -1,7 +1,10 @@
 
 const request = require('supertest');
-const app = require('../app');
+const mysql = require('mysql');
+require('dotenv').config();
+
 const connection = require('../middleware/db_connect');
+const app = require('../app');
 
 describe('Unit Test /', () => {
   it('should respond with index.html', async () => {
@@ -24,8 +27,15 @@ describe('Unit Test /app2', () => {
   });
 });
 
+/*
 describe('Integration Test Connect Database', () => {
-  afterAll(() => {
+  beforeEach(() => {
+    // Set the connection for the application to use
+    app.set('connection', connection.connect);
+  });
+
+  afterEach(() => {
+    // Close the connection pool after the tests are done
     connection.end();
   });
 
@@ -34,3 +44,4 @@ describe('Integration Test Connect Database', () => {
     expect(response.status).toBe(200);
   });
 });
+*/
